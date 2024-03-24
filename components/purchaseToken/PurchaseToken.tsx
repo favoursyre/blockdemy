@@ -1,5 +1,5 @@
 "use client"
-///Purchase Info component
+///Purchase Token component
 
 ///Libraries -->
 import styles from "./purchaseToken.module.scss"
@@ -18,10 +18,10 @@ import { companyName } from "@/config/utils";
 ///Commencing the code 
 
 /**
- * @title Purchase Course Component
- * @returns The Purchase Course component
+ * @title Purchase Token Component
+ * @returns The Purchase Token component
  */
-const PurchaseCourse = ({ course_ }: { course_: ICourse | undefined }) => {
+const PurchaseToken = ({ course_ }: { course_: ICourse | undefined }) => {
     const stars = [0, 1, 2, 3, 4]
     const [course, setCourse] = useState<ICourse | undefined>(course_)
     const router = useRouter()
@@ -37,17 +37,18 @@ const PurchaseCourse = ({ course_ }: { course_: ICourse | undefined }) => {
         </div>
         <div className={styles.bottom}>
             <div className={styles.brief}>
-                <span className={styles.brief1}>Purchase {companyName} Tokens to Enroll in courses</span>
+                <span className={styles.brief1}><strong>Purchase {companyName} Tokens to Enroll in courses</strong></span>
                 <span className={styles.brief2}>Decentralized Education Empowered by Cartesi Roll Ups & Token Rewards</span>
                 <span className={styles.brief3}>After purchasing the  token, you can go back to enroll for your courses.</span>
             </div>
             <div className={styles.card}>
-                <div className={styles.imageDiv}>
+                <div className={styles.logo}>
                     <Image
                       className={styles.image} 
                       alt=""
-                      src={course?.image ? course?.image : ""}
+                      src={bdt}
                     />
+                    <span>{companyName}</span>
                 </div>
                 <div className={styles.brief}>
                     <span className={styles.title}>{course?.title}</span>
@@ -71,4 +72,4 @@ const PurchaseCourse = ({ course_ }: { course_: ICourse | undefined }) => {
   );
 };
 
-export default PurchaseCourse;
+export default PurchaseToken;
