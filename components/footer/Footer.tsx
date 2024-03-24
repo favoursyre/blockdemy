@@ -4,7 +4,7 @@
 ///Libraries -->
 import styles from "./footer.module.scss"
 import { useRouter, usePathname } from 'next/navigation';
-import { companyName, domainName } from "@/config/utils";
+import { companyName, domainName, routeStyle } from "@/config/utils";
 
 ///Commencing the code 
 
@@ -18,7 +18,7 @@ const Footer = () => {
 
   return (
     <>
-      <div className={styles.main}>
+      <div className={`${styles.main} ${routeStyle(routerPath, styles)}`}>
         <div className={styles.links}>
             <div className={styles.div1}>
                 <span className={styles.title}>Product</span>

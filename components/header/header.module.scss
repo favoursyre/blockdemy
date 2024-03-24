@@ -5,7 +5,7 @@
 
 //Commencing the code -->
 .header {
-    border: 1px solid red;
+    //border: 1px solid red;
     @include max-size;
     @include size(86%, 60px);
     margin: 0px;

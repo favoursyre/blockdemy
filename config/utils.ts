@@ -2,7 +2,8 @@
 
 ///Libraries -->
 import { ethers } from 'ethers';
-import { text } from 'stream/consumers';
+import { courses } from './database';
+import { ICourse } from './interfaces';
 
 ///Commencing the code
 export const companyName: string = "Blockdemy"
@@ -52,3 +53,53 @@ export const connectTrust = (): void => {
 export const toLowerDash = (text: string): string => {
     return text.toLowerCase().replace(/\s+/g, '-')
 }
+
+///This checks for a router path and renders the necessary style for it
+export const routeStyle = (router: string, styles: { readonly [key: string]: string } ): string => {
+    //console.log("Router: ", router)
+    switch (router) {
+        case "/":
+            return styles.homePage
+        case "/cart":
+            return styles.cartPage
+        // case "/terms":
+        //     return styles.termsPage
+        // case "/order":
+        //     return styles.orderPage
+        // case "/about":
+        //     return styles.aboutPage
+        // case "/products/search":
+        //     return styles.searchPage
+        default:
+            for (const course of courses) {
+                if (course.title) {
+                    if (router === `/${toLowerDash(course.title)}`) {
+                        return styles.courseInfoPage
+                    }
+                }
+            }
+            for (const course of courses) {
+                if (course.title) {
+                    if (router === `/${toLowerDash(course.title)}/purchase-course`) {
+                        return styles.purchaseCoursePage
+                    }
+                }
+            }
+            if (router.includes("/cart/")) {
+                return styles.cartReceiptPage
+            } else {
+                return styles.others
+            }
+    }
+}
+
+//This fn gets the course info that was clicked
+export const getCourse = (name: string): ICourse | undefined => {
+    for (let course of courses) {
+      if (course.title) {
+        if (toLowerDash(course.title) === name) {
+          return course
+        }
+      }
+    }
+  }
