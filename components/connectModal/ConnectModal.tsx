@@ -10,7 +10,7 @@ import trust from "@/public/images/trust.png"
 import coinbase from "@/public/images/coinbase.png"
 import metamask from "@/public/images/metamask.png"
 import Image from "next/image";
-import { connectToWallet, connectMetamask, connectTrust, connectCoinbase } from "@/config/utils";
+import { connectMetamask, connectTrust, connectCoinbase } from "@/config/utils";
 
 ///Commencing the code 
 
