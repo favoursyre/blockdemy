@@ -60,8 +60,6 @@ export const routeStyle = (router: string, styles: { readonly [key: string]: str
     switch (router) {
         case "/":
             return styles.homePage
-        case "/cart":
-            return styles.cartPage
         // case "/terms":
         //     return styles.termsPage
         // case "/order":
@@ -80,11 +78,18 @@ export const routeStyle = (router: string, styles: { readonly [key: string]: str
             }
             for (const course of courses) {
                 if (course.title) {
-                    if (router === `/${toLowerDash(course.title)}/purchase-course`) {
+                    if (router === `/${toLowerDash(course.title)}/purchase-course` || router === `/${toLowerDash(course.title)}/purchase-token`) {
                         return styles.purchaseCoursePage
                     }
                 }
             }
+            // for (const course of courses) {
+            //     if (course.title) {
+            //         if (router === `/${toLowerDash(course.title)}/purchase-token`) {
+            //             return styles.purchaseCoursePage
+            //         }
+            //     }
+            // }
             if (router.includes("/cart/")) {
                 return styles.cartReceiptPage
             } else {
