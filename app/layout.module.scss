@@ -7,7 +7,7 @@
 .html {
     --scroll-behavior: smooth !important;
     scroll-behavior: smooth !important;
-    overflow-x: hidden; //hidden
+    overflow-x: auto; //hidden
     overflow-y: auto;
     //border: 1px solid black;
     width: 100%;

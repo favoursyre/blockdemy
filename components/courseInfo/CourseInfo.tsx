@@ -14,6 +14,7 @@ import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import frontend from "@/public/images/frontend.png"
 import { useRouter } from "next/navigation";
 import { toLowerDash } from "@/config/utils";
+import { useIsEnrolledStore } from "@/config/store";
 
 ///Commencing the code 
 
@@ -25,13 +26,20 @@ const CourseInfo = ({ course_ }: { course_: ICourse | undefined }) => {
     const stars = [0, 1, 2, 3, 4]
     const [course, setCourse] = useState<ICourse | undefined>(course_)
     const router = useRouter()
+    const setIsEnrolled = useIsEnrolledStore(state => state.setIsEnrolled);
+    const isEnrolled = useIsEnrolledStore(state => state.isEnrolled)
+
 
     ///This function is triggered when the user clicks on enroll now
-    const enrollNow = (e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
+    const processCourse = (e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
         e.preventDefault()
 
         if (course?.title) {
-            router.push(`/${toLowerDash(course?.title)}/purchase-course`)
+            if (isEnrolled) {
+                router.push(`/${toLowerDash(course?.title)}/token-reward`)
+            } else {
+                router.push(`/${toLowerDash(course?.title)}/purchase-course`)
+            }
         }
     }
 
@@ -132,13 +140,13 @@ const CourseInfo = ({ course_ }: { course_: ICourse | undefined }) => {
                     </div>
                     <span className={styles.text}>To enroll, you need Blockdemy tokens. <strong>Purchase</strong></span>
                 </div>
-                <button onClick={(e) => enrollNow(e)}><span>Enroll Now</span></button>
+                <button onClick={(e) => processCourse(e)}><span>{isEnrolled ? "Redeem Reward" : "Enroll Now"}</span></button>
                 <div className={styles.progress}>
                     <span className={styles.span1}>Your Progress</span>
                     <div className={styles.bar}>
-                        <div className={styles.inner}></div>
+                        <div className={styles.inner} style={{ width: isEnrolled ? "100%" : "1%" }} ></div>
                     </div>
-                    <span className={styles.span2}>0% complete</span>
+                    <span className={styles.span2}>{isEnrolled ? "100%" : "0%" } complete</span>
                 </div>
             </div>
             <div className={styles.recent}>

@@ -6,14 +6,15 @@ import styles from "./purchaseToken.module.scss"
 import Image from "next/image";
 import StarIcon from '@mui/icons-material/Star';
 import { courses } from "@/config/database";
-import { useState } from "react";
+import { useState, MouseEvent } from "react";
 import { ICourse } from "@/config/interfaces";
 import bdt from "@/public/images/bdt.png"
 import { useRouter } from "next/navigation";
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import dots from "@/public/images/dots.png"
-import { companyName } from "@/config/utils";
+import { companyName, toLowerDash } from "@/config/utils";
+import { useIsEnrolledStore } from "@/config/store";
 
 ///Commencing the code 
 
@@ -26,6 +27,18 @@ const PurchaseToken = ({ course_ }: { course_: ICourse | undefined }) => {
     const [course, setCourse] = useState<ICourse | undefined>(course_)
     const router = useRouter()
     const [amount, setAmount] = useState<string>("")
+    const setIsEnrolled = useIsEnrolledStore((state) => state.setIsEnrolled)
+
+    ///This function is triggered when the buy now is clicked
+    const buyToken = (e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
+        e.preventDefault()
+
+        setIsEnrolled(true)     
+
+        //Routing back to the course info with redeem reward
+        let title = toLowerDash(course?.title ? course?.title : "")
+        router.push(`/${title}`)
+    }
 
   return (
     <div className={styles.main}>
@@ -85,7 +98,7 @@ const PurchaseToken = ({ course_ }: { course_: ICourse | undefined }) => {
                         <span className={styles.span2}><strong>1 USDT = 2 Blockdemy tokens</strong></span>
                     </div>
                 </div>
-                <button><span>Buy Now</span></button>
+                <button onClick={(e) => buyToken(e)}><span>Buy Now</span></button>
             </div>
         </div>
     </div>

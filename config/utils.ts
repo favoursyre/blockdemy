@@ -60,8 +60,8 @@ export const routeStyle = (router: string, styles: { readonly [key: string]: str
     switch (router) {
         case "/":
             return styles.homePage
-        // case "/terms":
-        //     return styles.termsPage
+        case "/profile":
+            return styles.profilePage
         // case "/order":
         //     return styles.orderPage
         // case "/about":
@@ -83,13 +83,20 @@ export const routeStyle = (router: string, styles: { readonly [key: string]: str
                     }
                 }
             }
-            // for (const course of courses) {
-            //     if (course.title) {
-            //         if (router === `/${toLowerDash(course.title)}/purchase-token`) {
-            //             return styles.purchaseCoursePage
-            //         }
-            //     }
-            // }
+            for (const course of courses) {
+                if (course.title) {
+                    if (router === `/${toLowerDash(course.title)}/token-reward`) {
+                        return styles.tokenRewardPage
+                    }
+                }
+            }
+            for (const course of courses) {
+                if (course.title) {
+                    if (router === `/${toLowerDash(course.title)}/token-reward/nft-collections`) {
+                        return styles.nftCollectionPage
+                    }
+                }
+            }
             if (router.includes("/cart/")) {
                 return styles.cartReceiptPage
             } else {

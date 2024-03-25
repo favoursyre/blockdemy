@@ -60,8 +60,8 @@ const Header = () => {
                       value={query}
                     />
                 </form>
-                <button className={styles.profile}>Your Profile</button>
-                <button className={styles.whyUs}>Why Us</button>
+                <button className={styles.profile} onClick={(e) => router.push("/profile")}>Your Profile</button>
+                <button className={styles.whyUs} onClick={(e) => router.push("/#why-us")}>Why Us</button>
             </div>
             <button className={styles.menu} onClick={(e) => viewMenu(e)}>
                 {menu ? (
@@ -83,8 +83,8 @@ const Header = () => {
                     value={query}
                 />
             </form>
-            <button className={styles.profile} onClick={(e) => openMenuLink(e, "")}>Your Profile</button>
-            <button className={styles.whyUs} onClick={(e) => openMenuLink(e, "")}>Why Us</button>
+            <button className={styles.profile} onClick={(e) => openMenuLink(e, "/profile")}>Your Profile</button>
+            <button className={styles.whyUs} onClick={(e) => openMenuLink(e, "/#why-us")}>Why Us</button>
         </div>
     </>
   );
